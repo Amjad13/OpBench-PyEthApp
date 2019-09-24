@@ -150,66 +150,66 @@ def profile_vm_test(params, _):
     # s3, o3 = pb.apply_transaction(state, tx2)
     # print "Balance after mining is: ", state.get_balance(sender)
     # print ext.log_storage(output)
-    # from _vm import vm_execute, Message, CallData, lisexTime, _list
-    # msg = Message(tx.sender, tx.to, tx.value, tx.startgas, CallData([ord(x) for x in tx.data]))
-    # # vm_execute(ext, msg, ext.get_code(msg.code_address))
-    # success, gas_remained, comStack = vm_execute(ext, msg, exek['code'][2:].decode('hex'))
-    # state.commit()
-    # t2 = time.time()
-    # trace = recorder.pop_records()
-    # _time = [x['Time'] for x in trace if x['event'] == 'vm']
-    # average = []
-    # ops = [x['op'] for x in trace if x['event'] == 'vm']
-    # opdict = {}
-    # for op in ops:
-    #     opdict[op] = opdict.get(op, 0) + 1
-    # for i in _time:
-    #     for s, (t, ops) in i.iteritems():
-    #         if ops == "PUSH1":
-    #             average.append(t)
-    # _average = float(sum(average))/len(average)
-    # return {"ops": opdict, "time": t2 - t1}
-    # return {"Ops": exTime.get(0), "totalTime": t2 - t1, "Average": exTime.get(1)}
-    # average = []
-    # _average1 = []
-    # Gas = []
-    # print 'most ccommon', Most_Common(_list)
-    # print 'least common', least_common(_list)
-    # print _list.count("PUSH1")
-    # if _[:3] not in ['PUS', 'SWA', 'DUP', 'SHA', 'MST']:
-    #     opo = filter(lambda c: not c.isdigit(), _)
-    # else:
-    #     opo = _[:-1]
-    # for p in lisexTime:
-    #     if p["opcs"] == opo:
-    #         _average1.append(p["Time"])
-    # for p in lisexTime:
-    #     if p["opcs"] == opo:
-    #         average.append(p["Time"])
-    #         Gas.append(p["GasUsed"])
-    # print opo        
-    # print lisexTime
-    # print opo
-    # _average = float(sum(average))/len(average)
-    # lisexTime.append({"average": _average})
-    # lower, upper = mean_confidence_interval(_average1, confidence=0.95)
-    # stdv = statistics.stdev(_average1)
-    # print len(_list)
-    # print {"average": _average}
-    # print Gas
-    # return {'Opcode': _, 'Occurrence': _list.count(opo), "Mean": _average, "Upper bound": upper, "Lower bound": lower, "95% Confidence Interval": (upper - lower)/2, "Used Gas": Gas[0], "Standard Deviation": stdv}
-    _crt = exTime
-    _crt1 = gasUsed
-    with open("_Extime3.csv", "a") as f:
-        w = csv.writer(f)
-        _crt.append("Break")
-        for v in _crt:
-            w.writerow([v])
-    with open("_Extime4.csv", "a") as f:
-        w = csv.writer(f)
-        for v in _crt1:
-            w.writerow([v])
-    return {'Result': " "}
+    from _vm import vm_execute, Message, CallData, lisexTime, _list
+    msg = Message(tx.sender, tx.to, tx.value, tx.startgas, CallData([ord(x) for x in tx.data]))
+    # vm_execute(ext, msg, ext.get_code(msg.code_address))
+    success, gas_remained, comStack = vm_execute(ext, msg, exek['code'][2:].decode('hex'))
+    state.commit()
+    t2 = time.time()
+    trace = recorder.pop_records()
+    _time = [x['Time'] for x in trace if x['event'] == 'vm']
+    average = []
+    ops = [x['op'] for x in trace if x['event'] == 'vm']
+    opdict = {}
+    for op in ops:
+        opdict[op] = opdict.get(op, 0) + 1
+    for i in _time:
+        for s, (t, ops) in i.iteritems():
+            if ops == "PUSH1":
+                average.append(t)
+    _average = float(sum(average))/len(average)
+    return {"ops": opdict, "time": t2 - t1}
+    return {"Ops": exTime.get(0), "totalTime": t2 - t1, "Average": exTime.get(1)}
+    average = []
+    _average1 = []
+    Gas = []
+    print 'most ccommon', Most_Common(_list)
+    print 'least common', least_common(_list)
+    print _list.count("PUSH1")
+    if _[:3] not in ['PUS', 'SWA', 'DUP', 'SHA', 'MST']:
+        opo = filter(lambda c: not c.isdigit(), _)
+    else:
+        opo = _[:-1]
+    for p in lisexTime:
+        if p["opcs"] == opo:
+            _average1.append(p["Time"])
+    for p in lisexTime:
+        if p["opcs"] == opo:
+            average.append(p["Time"])
+            Gas.append(p["GasUsed"])
+    print opo        
+    print lisexTime
+    print opo
+    _average = float(sum(average))/len(average)
+    lisexTime.append({"average": _average})
+    lower, upper = mean_confidence_interval(_average1, confidence=0.95)
+    stdv = statistics.stdev(_average1)
+    print len(_list)
+    print {"average": _average}
+    print Gas
+    return {'Opcode': _, 'Occurrence': _list.count(opo), "Mean": _average, "Upper bound": upper, "Lower bound": lower, "95% Confidence Interval": (upper - lower)/2, "Used Gas": Gas[0], "Standard Deviation": stdv}
+#     _crt = exTime
+#     _crt1 = gasUsed
+#     with open("_Extime3.csv", "a") as f:
+#         w = csv.writer(f)
+#         _crt.append("Break")
+#         for v in _crt:
+#             w.writerow([v])
+#     with open("_Extime4.csv", "a") as f:
+#         w = csv.writer(f)
+#         for v in _crt1:
+#             w.writerow([v])
+#     return {'Result': " "}
 
 def recursive_list(d):
     files = []
@@ -250,4 +250,4 @@ def prepare_files(vm_files):
     return o
 
 
-open('calldatacopyR.json', 'w').write(json.dumps(prepare_files(recursive_list(sys.argv[1])), indent=4))
+open('GeneratorByteCodes.json', 'w').write(json.dumps(prepare_files(recursive_list(sys.argv[1])), indent=4))
