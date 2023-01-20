@@ -1,23 +1,18 @@
 import json
-import logging
+import os
 import transactions
 from state import State
 from config import Env
 import messages as pb
 import utils as u
-from slogging import LogRecorder, configure, get_logger, get_logger_names, get_configuration
 import block
 import time
-from ethereum.db import EphemDB
-import os
+import db_leveldb
 import sys
-from collections import Counter
-from string import digits
 import numpy as np
 import scipy as sp
 import scipy.stats
 import statistics
-import csv
 import xlrd
 
 
